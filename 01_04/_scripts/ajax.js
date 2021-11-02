@@ -58,5 +58,8 @@ document.addEventListener("DOMContentLoaded", function () {
   // add get() function call here
   // get(url, successHandler, failHandler)
   // successHandler(httpRequest.responseText)
-  console.log(get(url));
+  // console.log(get(url));
+  get(url).then(function (response) {
+    successHandler(response);
+  });
 });
