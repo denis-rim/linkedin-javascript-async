@@ -12,6 +12,11 @@ function get(url) {
         reject(Error(httpRequest.status));
       }
     };
+
+    httpRequest.onerror = function () {
+      reject(Error("Network error"));
+    };
+
     httpRequest.send();
   });
 }
@@ -50,16 +55,16 @@ function failHandler(status) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  // const apiKey = ''; // ADD YOUR API KEY BETWEEN THE QUOTES
+  // const apiKey = ""; // ADD YOUR API KEY BETWEEN THE QUOTES
   const apiKey = "7846cfbfd1b49dad9cb82c1ff2a4250e"; // ADD YOUR API KEY BETWEEN THE QUOTES
   const url =
     "https://api.openweathermap.org/data/2.5/weather?q=los+angeles&APPID=" +
     apiKey;
-  // add get() function call here
-  // get(url, successHandler, failHandler)
-  // successHandler(httpRequest.responseText)
-  // console.log(get(url));
-  get(url).then(function (response) {
-    successHandler(response);
-  });
+  get(url)
+    .then(function (response) {
+      successHandler(response);
+    })
+    .catch(function (status) {
+      failHandler(status);
+    });
 });
