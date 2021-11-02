@@ -66,5 +66,6 @@ this.addEventListener("message", function (e) {
   // console.log("Message received from main script");
   // console.log(e.data);
   const workerResult = applyFilter(e.data.filter, e.data.level, e.data.image);
-  console.log(workerResult);
+  // console.log(workerResult);
+  this.postMessage(workerResult);
 });

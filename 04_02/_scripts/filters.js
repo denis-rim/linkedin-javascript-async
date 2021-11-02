@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const ctx = outputCanvas.getContext("2d");
   let selectedFilter = "";
   const worker = new Worker("_scripts/filter-worker.js");
-  worker.postMessage("Hello Worker");
+  // worker.postMessage("Hello Worker");
   // console.log("Message send to worker");
 
   const getImageData = (image) => {
@@ -167,4 +167,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   image.addEventListener("load", resetCanvas);
+
+  worker.addEventListener("message", function (e) {
+    console.log("Received data from worker:");
+    console.log(e.data);
+    displayFilteredImage(ctx, e.data);
+  });
 });
